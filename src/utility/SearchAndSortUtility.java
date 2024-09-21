@@ -38,6 +38,9 @@ public class SearchAndSortUtility<T> {
                 }
             }
         }
+        else {
+            System.out.println("Передано нечисловое поле");
+        }
         //TODO Нужно указать пользователю, что на вход сортировки подано нечисловое поле
     }
 
