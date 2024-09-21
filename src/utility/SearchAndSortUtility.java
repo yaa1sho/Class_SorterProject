@@ -1,7 +1,4 @@
 package utility;
-
-import utility.Sortable;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,12 +38,14 @@ public class SearchAndSortUtility<T> {
                 }
             }
         }
+        //TODO Нужно указать пользователю, что на вход сортировки подано нечисловое поле
     }
 
     public static <T> int firstIndexOf(List<T> items, T key, Sortable<T> sortable) {
         int left = 0;
         int right = items.size() - 1;
         int result = -1;
+
 
         while (left <= right) {
             int mid = left + (right - left) / 2;
@@ -61,7 +60,8 @@ public class SearchAndSortUtility<T> {
                 right = mid - 1;
             }
         }
-        return result;
+        return result; //TODO Нужно обработать результат -1 (элемент не найден)
+
     }
 
     private static boolean isNumber(Object value) {
