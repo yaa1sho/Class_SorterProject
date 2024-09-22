@@ -1,4 +1,6 @@
-package org.example.classes;
+package main.java.org.example.classes;
+
+import main.java.org.example.input.IBuilder;
 
 public class Car {
     private float power;
@@ -17,20 +19,22 @@ public class Car {
         return year;
     }
 
-    private Car(){}
+    private Car() {
+    }
 
-    private Car(Builder builder){
+    private Car(Builder builder) {
         power = builder.power;
         model = builder.model;
         year = builder.year;
     }
 
-    public static class Builder {
+    public static class Builder implements IBuilder<Car> {
         private float power;
         private String model;
         private int year;
 
-        public Builder(String model){}
+        public Builder() {
+        }
 
         public Builder setPower(float power) {
             this.power = power;
@@ -47,9 +51,36 @@ public class Car {
             return this;
         }
 
-        public Car build(){
+        public Car build() {
+            return new Car(this);
+        }
+
+        @Override
+        public Car buildFromString(String line) {
+            //TODO реализовать метод
+            return null;
+        }
+
+        @Override
+        public Car buildFromConsole() {
+            //TODO реализовать метод
+            return null;
+        }
+
+        @Override
+        public Car buildRandomObj() {
+            //TODO реализовать метод
+            this.setModel("testModel").setPower(100).setYear(2024);
             return new Car(this);
         }
     }
 
+    @Override
+    public String toString() {
+        return "Car{" +
+                "power=" + power +
+                ", model='" + model + '\'' +
+                ", year=" + year +
+                '}';
+    }
 }

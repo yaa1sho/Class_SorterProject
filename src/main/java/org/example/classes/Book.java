@@ -1,4 +1,6 @@
-package org.example.classes;
+package main.java.org.example.classes;
+
+import main.java.org.example.input.IBuilder;
 
 public class Book {
     private String name;
@@ -25,12 +27,12 @@ public class Book {
         pageCount = builder.pageCount;
     }
 
-    public static class Builder {
+    public static class Builder implements IBuilder<Book> {
         private String name;
         private String author;
         private int pageCount;
 
-        public Builder(String model){}
+        public Builder(){}
 
         public Builder setName(String name) {
             this.name = name;
@@ -49,6 +51,24 @@ public class Book {
 
         public Book build(){
             return new Book(this);
+        }
+
+        @Override
+        public Book buildFromString(String line) {
+            //TODO реализовать метод
+            return null;
+        }
+
+        @Override
+        public Book buildFromConsole() {
+            //TODO реализовать метод
+            return null;
+        }
+
+        @Override
+        public Book buildRandomObj() {
+            //TODO реализовать метод
+            return null;
         }
     }
 

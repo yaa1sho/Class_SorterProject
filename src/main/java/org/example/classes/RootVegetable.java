@@ -1,4 +1,6 @@
-package org.example.classes;
+package main.java.org.example.classes;
+
+import main.java.org.example.input.IBuilder;
 
 public class RootVegetable {
     private String type;
@@ -25,12 +27,12 @@ public class RootVegetable {
         weight = builder.weight;
     }
 
-    public static class Builder {
+    public static class Builder implements IBuilder<RootVegetable> {
         private String type;
         private String color;
         private int weight;;
 
-        public Builder(String model){}
+        public Builder(){}
 
         public Builder setColor(String color) {
             this.color = color;
@@ -49,6 +51,24 @@ public class RootVegetable {
 
         public RootVegetable build(){
             return new RootVegetable(this);
+        }
+
+        @Override
+        public RootVegetable buildFromString(String line) {
+            //TODO реализовать метод
+            return null;
+        }
+
+        @Override
+        public RootVegetable buildFromConsole() {
+            //TODO реализовать метод
+            return null;
+        }
+
+        @Override
+        public RootVegetable buildRandomObj() {
+            //TODO реализовать метод
+            return null;
         }
     }
 
