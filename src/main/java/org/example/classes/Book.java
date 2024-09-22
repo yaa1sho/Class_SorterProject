@@ -30,7 +30,11 @@ public class Book {
         private String author;
         private int pageCount;
 
+<<<<<<< HEAD
         public Builder(){}
+=======
+        public Builder(String model){}
+>>>>>>> 087e127 (Добавил классы: автомобиль, книга, корнеплод. Реализовал для них паттерн builder. Также в main реализовал цикл и выход из него по требованию юзера.)
 
         public Builder setName(String name) {
             this.name = name;

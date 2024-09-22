@@ -30,7 +30,11 @@ public class Car {
         private String model;
         private int year;
 
+<<<<<<< HEAD
         public Builder(){}
+=======
+        public Builder(String model){}
+>>>>>>> 087e127 (Добавил классы: автомобиль, книга, корнеплод. Реализовал для них паттерн builder. Также в main реализовал цикл и выход из него по требованию юзера.)
 
         public Builder setPower(float power) {
             this.power = power;
