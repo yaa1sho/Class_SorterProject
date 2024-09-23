@@ -33,8 +33,8 @@ public class Car {
         private String model;
         private int year;
 
-        public Builder() {
-        }
+        public Builder(){}
+        public Builder(String model){}
 
         public Builder setPower(float power) {
             this.power = power;

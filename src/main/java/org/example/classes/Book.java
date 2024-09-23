@@ -32,7 +32,10 @@ public class Book {
         private String author;
         private int pageCount;
 
+
         public Builder(){}
+
+        public Builder(String model){}
 
         public Builder setName(String name) {
             this.name = name;

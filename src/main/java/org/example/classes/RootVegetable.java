@@ -2,10 +2,11 @@ package main.java.org.example.classes;
 
 import main.java.org.example.input.IBuilder;
 
-public class RootVegetable {
-    private String type;
-    private String color;
-    private int weight;
+//immutable class
+public final class RootVegetable {
+    private final String type;
+    private final String color;
+    private final int weight;
 
     public int getWeight() {
         return weight;
@@ -19,20 +20,24 @@ public class RootVegetable {
         return type;
     }
 
-    private RootVegetable(){}
-
-    private RootVegetable(Builder builder){
-        type = builder.type;
-        color = builder.color;
-        weight = builder.weight;
+    private RootVegetable(Builder builder) {
+        this.type = builder.type;
+        this.color = builder.color;
+        this.weight = builder.weight;
     }
+//    private RootVegetable(){}
+
 
     public static class Builder implements IBuilder<RootVegetable> {
         private String type;
         private String color;
-        private int weight;;
+        private int weight;
 
-        public Builder(){}
+        public Builder() {
+        }
+
+        public Builder(String model) {
+        }
 
         public Builder setColor(String color) {
             this.color = color;
@@ -49,7 +54,7 @@ public class RootVegetable {
             return this;
         }
 
-        public RootVegetable build(){
+        public RootVegetable build() {
             return new RootVegetable(this);
         }
 
