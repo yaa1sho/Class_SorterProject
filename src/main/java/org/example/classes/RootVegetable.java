@@ -2,13 +2,17 @@ package main.java.org.example.classes;
 
 import main.java.org.example.input.IBuilder;
 
+import java.util.List;
+import java.util.Random;
+import java.util.Scanner;
+
 //immutable class
 public final class RootVegetable {
     private final String type;
     private final String color;
-    private final int weight;
+    private final double weight;
 
-    public int getWeight() {
+    public double getWeight() {
         return weight;
     }
 
@@ -25,18 +29,13 @@ public final class RootVegetable {
         this.color = builder.color;
         this.weight = builder.weight;
     }
-//    private RootVegetable(){}
-
 
     public static class Builder implements IBuilder<RootVegetable> {
         private String type;
         private String color;
-        private int weight;
+        private double weight;
 
         public Builder() {
-        }
-
-        public Builder(String model) {
         }
 
         public Builder setColor(String color) {
@@ -49,7 +48,7 @@ public final class RootVegetable {
             return this;
         }
 
-        public Builder setWeight(int weight) {
+        public Builder setWeight(double weight) {
             this.weight = weight;
             return this;
         }
@@ -59,22 +58,88 @@ public final class RootVegetable {
         }
 
         @Override
+        public String getDataFileRequirements() {
+            return """
+                      тип, цвет, вес
+                      тип, цвет, вес
+                      ...
+                    """;
+        }
+
+        @Override
         public RootVegetable buildFromString(String line) {
-            //TODO реализовать метод
+            String[] values = line.split(",");
+            setType(values[0].trim());
+            setColor(values[1].trim());
+            double weight = -1;
+            try {
+                weight = Double.parseDouble(values[2].trim());
+            } catch (NumberFormatException ignored) {
+            }
+            if (weight > 0) {
+                setWeight(weight);
+                return new RootVegetable(this);
+            }
             return null;
         }
 
         @Override
         public RootVegetable buildFromConsole() {
-            //TODO реализовать метод
-            return null;
+            Scanner scanner = new Scanner(System.in);
+            String input;
+            do {
+                System.out.println("Введите тип корнеплода или exit:");
+                input = scanner.nextLine();
+                if ("exit".equalsIgnoreCase(input)) {
+                    return null;
+                }
+            } while (input.isEmpty() || input.isBlank());
+            setType(input);
+            do {
+                System.out.println("Введите цвет корнеплода или exit:");
+                input = scanner.nextLine();
+                if ("exit".equalsIgnoreCase(input)) {
+                    return null;
+                }
+            } while (input.isEmpty() || input.isBlank());
+            setColor(input);
+            double weight = -1;
+            do {
+                System.out.println("Введите вес корнеплода или exit:");
+                input = scanner.nextLine();
+                if ("exit".equalsIgnoreCase(input)) {
+                    return null;
+                }
+                try {
+                    weight = Double.parseDouble(input.trim());
+                } catch (NumberFormatException exception) {
+                    System.out.println("Вес должен быть числом!");
+                }
+            } while (weight < 1);
+            setWeight(weight);
+            return new RootVegetable(this);
         }
 
         @Override
         public RootVegetable buildRandomObj() {
-            //TODO реализовать метод
-            return null;
+            List<String> types = List.of("морковь", "свекла", "редька", "картофель", "репа", "дайкон", "пастернак",
+                    "турнепс", "батат", "лавровый корень");
+            List<String> colors = List.of("красный", "синий", "зеленый", "желтый", "фиолетовый", "оранжевый", "розовый",
+                    "белый", "черный", "серый");
+            Random random = new Random();
+            setType(types.get(random.nextInt(types.size())));
+            setColor(colors.get(random.nextInt(colors.size())));
+            setWeight(random.nextDouble(11));
+            return new RootVegetable(this);
         }
     }
 
+    @Override
+    public String toString() {
+        return "RootVegetable{" +
+                "type='" + type + '\'' +
+                ", color='" + color + '\'' +
+                ", weight=" + weight +
+                '}';
+    }
 }

@@ -22,7 +22,8 @@ public class DataInput<T> {
         List<String> fileStrings = new ArrayList<>();
         if (inputType == InputType.CSV_FILE) {
             do {
-                System.out.println("Введите путь к файлу или exit:");
+                System.out.println("Введите путь к файлу или exit. Файл должен содержать данные в следующем формате:\n"
+                        + builder.getDataFileRequirements());
                 String filePath = new Scanner(System.in).nextLine();
                 if ("exit".equalsIgnoreCase(filePath)) {
                     return list;

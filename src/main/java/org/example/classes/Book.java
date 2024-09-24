@@ -41,9 +41,6 @@ public class Book {
         public Builder() {
         }
 
-        public Builder(String model) {
-        }
-
         public Builder setName(String name) {
             this.name = name;
             return this;
@@ -61,6 +58,15 @@ public class Book {
 
         public Book build() {
             return new Book(this);
+        }
+
+        @Override
+        public String getDataFileRequirements() {
+            return """
+                      название, автор, количество страниц
+                      название, автор, количество страниц
+                      ...
+                    """;
         }
 
         @Override
@@ -104,7 +110,7 @@ public class Book {
             do {
                 System.out.println("Введите количество страниц или exit:");
                 input = scanner.nextLine();
-                if ("exit".equalsIgnoreCase(author)) {
+                if ("exit".equalsIgnoreCase(input)) {
                     return null;
                 }
                 try {
@@ -132,4 +138,12 @@ public class Book {
         }
     }
 
+    @Override
+    public String toString() {
+        return "Book{" +
+                "name='" + name + '\'' +
+                ", author='" + author + '\'' +
+                ", pageCount=" + pageCount +
+                '}';
+    }
 }

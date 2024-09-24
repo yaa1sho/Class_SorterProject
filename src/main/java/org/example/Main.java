@@ -13,9 +13,23 @@ public class Main {
         while (true) {
             System.out.println("exit - leave the program");
             input = scanner.nextLine();
-            if (input.equals("car")) {
-                List<Car> cars = new DataInput<>(new Car.Builder()).fromSourceToList(1, InputType.RANDOM);
-                System.out.println(cars);
+            while (input.equals("car")) {
+                input = scanner.nextLine();
+                switch (input) {
+                    case "random":
+                        List<Car> cars1 = new DataInput<>(new Car.Builder()).fromSourceToList(3, InputType.RANDOM);
+                        System.out.println(cars1);
+                        break;
+                    case "console":
+                        List<Car> cars2 = new DataInput<>(new Car.Builder()).fromSourceToList(3, InputType.CONSOLE);
+                        System.out.println(cars2);
+                        break;
+                    case "file":
+                        List<Car> cars3 = new DataInput<>(new Car.Builder()).fromSourceToList(3, InputType.CSV_FILE);
+                        System.out.println(cars3);
+                        break;
+                }
+                input = scanner.nextLine();
             }
 
             if ("exit".equalsIgnoreCase(input)) {
