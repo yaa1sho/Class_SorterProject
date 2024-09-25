@@ -23,10 +23,18 @@ public class Book {
         return name;
     }
 
-    private Book() {
+    @Override
+    public String toString() {
+        return "Book{" +
+                "name='" + name + '\'' +
+                ", author='" + author + '\'' +
+                ", pageCount=" + pageCount +
+                '}' + "\n" ;
     }
 
-    private Book(Builder builder) {
+    public Book(){}
+
+    public Book(Builder builder){
         name = builder.name;
         author = builder.author;
         pageCount = builder.pageCount;
@@ -38,8 +46,8 @@ public class Book {
         private int pageCount;
 
 
-        public Builder() {
-        }
+        public Builder(){}
+        public Builder(String model){}
 
         public Builder setName(String name) {
             this.name = name;
@@ -56,17 +64,8 @@ public class Book {
             return this;
         }
 
-        public Book build() {
+        public Book build(){
             return new Book(this);
-        }
-
-        @Override
-        public String getDataFileRequirements() {
-            return """
-                      название, автор, количество страниц
-                      название, автор, количество страниц
-                      ...
-                    """;
         }
 
         @Override
@@ -136,14 +135,15 @@ public class Book {
             setPageCount(random.nextInt(3599) + 1);
             return new Book(this);
         }
+
+        @Override
+        public String getDataFileRequirements() {
+            return """
+                      название, автор, количество страниц
+                      название, автор, количество страниц
+                      ...
+                    """;
+        }
     }
 
-    @Override
-    public String toString() {
-        return "Book{" +
-                "name='" + name + '\'' +
-                ", author='" + author + '\'' +
-                ", pageCount=" + pageCount +
-                '}';
-    }
 }

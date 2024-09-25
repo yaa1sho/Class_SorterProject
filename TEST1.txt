@@ -1,0 +1,3 @@
+1444.94,Toyota Camry,928
+370.54,Toyota Camry,8117
+407.20,Nissan Altima,1036
